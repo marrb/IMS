@@ -18,6 +18,6 @@ ShipGenerator::ShipGenerator(unsigned int docks, unsigned int cranes, unsigned i
 }
 
 void ShipGenerator::Behavior(){
-    (new Ship(*dock_facilities, &ship_Q, docks))->Activate();
+    (new Ship(dock_facilities, &ship_Q, docks))->Activate();
     Activate(Time + Exponential(1440.0 / DayShipAvg));
 }

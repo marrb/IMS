@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <random>
 #include <ctime>
-Ship::Ship(Facility *docks, Queue *ship_Q, unsigned int dock_count){
+Ship::Ship(Facility **docks, Queue *ship_Q, unsigned int dock_count){
     Ship::docks = docks;
     is_starting = Random() <= 0.05;
     Ship::ship_Q = ship_Q;
@@ -25,7 +25,7 @@ void Ship::Behavior(){
     int fac_idx = -1;
     while(1){
         for(unsigned int i = 0; i < dock_count; i++){
-            if(!docks[i].Busy()){
+            if(!docks[i]->Busy()){
                 fac_idx = (int) i;
                 break;
             }
@@ -36,9 +36,9 @@ void Ship::Behavior(){
             Passivate();
         }
     }
-    Seize(docks[fac_idx]);
+    Seize(*docks[fac_idx]);
     Wait(100);
-    Release(docks[fac_idx]);
+    Release(*docks[fac_idx]);
     if(ship_Q->Length() > 0) ship_Q->GetFirst()->Activate();
 }
 

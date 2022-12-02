@@ -11,7 +11,7 @@
 
 class Ship : public Process {
     public:
-        Ship(Facility *docks, Queue *ship_Q, unsigned int dock_count);
+        Ship(Facility **docks, Queue *ship_Q, unsigned int dock_count);
 
         void Behavior() override;
         void Timeout();
@@ -20,7 +20,7 @@ private:
         int capacity_load;
         int capacity_unload;
         unsigned int dock_count;
-        Facility *docks;
+        Facility **docks;
         Queue *ship_Q;
 
 
