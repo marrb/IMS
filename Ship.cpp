@@ -37,7 +37,7 @@ void Ship::Behavior(){
         }
     }
     Seize(docks[fac_idx]);
-    Wait(1440);
+    Wait(100);
     Release(docks[fac_idx]);
     if(ship_Q->Length() > 0) ship_Q->GetFirst()->Activate();
 }
