@@ -21,15 +21,50 @@ void printHelp(){
     puts("-h : prints help");
 }
 
+typedef struct {
+    int cargo_docks;
+    int ships;
+    int days;
+    int cranes;
+} my_args;
+
 int main(int argc, char **argv){
     int option;
-    static const struct option longOptions[] = {
-        {}
+    my_args my_args = {
+        DEFAULT_NUMBER_OD_DOCKS,
+        DEFAULT_NUMBER_OF_SHIPS,
+        DEFAULT_NUMBER_OF_SIM_DAYS,
+        DEFAULT_NUMBER_OF_CRANES
     };
 
-    while((option = getopt_long(argc, argv, "", longOptions, nullptr)) != -1){
+    while((option = getopt_long(argc, argv, "d:s:D:c:h", nullptr, nullptr)) != -1){
         switch (option){
-            case 'f':
+            case 'd':
+                if((my_args.cargo_docks = atoi(optarg)) <= 0){
+                    printf("Invalid argument in option 'd'!");
+                    exit(1);
+                }
+                break;
+
+            case 's':
+                if((my_args.ships = atoi(optarg)) <= 0){
+                    printf("Invalid argument in option 's'!");
+                    exit(1);
+                }
+                break;
+            
+            case 'D':
+                if((my_args.days = atoi(optarg)) <= 0){
+                    printf("Invalid argument in option 'D'!");
+                    exit(1);
+                }
+                break;
+
+            case 'c':
+                if((my_args.cranes = atoi(optarg)) <= 0){
+                    printf("Invalid argument in option 'c'!");
+                    exit(1);
+                }
                 break;
 
             case 'h':
