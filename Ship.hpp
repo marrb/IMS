@@ -19,7 +19,7 @@ private:
         bool is_starting;
         int capacity_load;
         int capacity_unload;
-        Facility *docks ;
+        Facility *docks;
 
 
         const int AVARAGE_AVAILABLE_TIME_IN_PORT = 5;

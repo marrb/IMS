@@ -13,7 +13,7 @@ class ShipGenerator : public Event {
         unsigned int DayShipAvg;
         unsigned int docks;
         unsigned int cranes;
-        Facility *dock_facilities;
+        Facility **dock_facilities;
 
 };
 
