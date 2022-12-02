@@ -45,35 +45,35 @@ int main(int argc, char **argv){
         switch (option){
             case 'd':
                 if((my_args.cargo_docks = atoi(optarg)) <= 0){
-                    printf("Invalid argument in option 'd'!");
+                    fprintf(stderr, "Invalid argument in option 'd'!");
                     exit(1);
                 }
                 break;
 
             case 's':
                 if((my_args.ships = atoi(optarg)) <= 0){
-                    printf("Invalid argument in option 's'!");
+                    fprintf(stderr, "Invalid argument in option 's'!");
                     exit(1);
                 }
                 break;
             
             case 'D':
                 if((my_args.days = atoi(optarg)) <= 0){
-                    printf("Invalid argument in option 'D'!");
+                    fprintf(stderr, "Invalid argument in option 'D'!");
                     exit(1);
                 }
                 break;
 
             case 'c':
                 if((my_args.cranes = atoi(optarg)) <= 0){
-                    printf("Invalid argument in option 'c'!");
+                    fprintf(stderr, "Invalid argument in option 'c'!");
                     exit(1);
                 }
                 break;
 
             case 'w':
                 if((my_args.work_hours = atoi(optarg)) <= 0){
-                    printf("Invalid argument in option 'w'!");
+                    fprintf(stderr, "Invalid argument in option 'w'!");
                     exit(1);
                 }
                 break;
