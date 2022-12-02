@@ -6,10 +6,11 @@
 #include <stdio.h>
 #include <random>
 #include <ctime>
-Ship::Ship(Facility *docks, Queue *ship_Q){
+Ship::Ship(Facility *docks, Queue *ship_Q, unsigned int dock_count){
     Ship::docks = docks;
     is_starting = Random() <= 0.05;
     Ship::ship_Q = ship_Q;
+    Ship::dock_count = dock_count;
 
     if(is_starting){
         capacity_load = Exponential(15000);
@@ -23,7 +24,7 @@ Ship::Ship(Facility *docks, Queue *ship_Q){
 void Ship::Behavior(){
     int fac_idx = -1;
     while(1){
-        for(unsigned int i = 0; i < 2; i++){
+        for(unsigned int i = 0; i < dock_count; i++){
             if(!docks[i].Busy()){
                 fac_idx = (int) i;
                 break;
