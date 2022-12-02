@@ -4,16 +4,14 @@
 
 using namespace std;
 
-ShipGenerator::ShipGenerator(int DayShipAvg){
-    DayShipAvg = DayShipAvg;
-}
-
-ShipGenerator::~ShipGenerator(){
-
+ShipGenerator::ShipGenerator(unsigned int docks, unsigned int cranes, unsigned int DayShipAvg){
+    ShipGenerator::DayShipAvg = DayShipAvg;
+    ShipGenerator::docks = docks;
+    ShipGenerator::cranes = cranes;
 }
 
 void ShipGenerator::Behavior(){
-    (new Ship)->Activate();
-    cout << "Serus";
-    Activate(Time + Exponential(1));
+    //(new Ship)->Activate();
+    cout << "AVG: " << DayShipAvg << "\n";
+    Activate(Time + Exponential(1440.0 / DayShipAvg));
 }

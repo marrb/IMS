@@ -3,16 +3,16 @@
 
 #include <simlib.h>
 
-class ShipGenerator : public Process {
+class ShipGenerator : public Event {
     public:
-        ShipGenerator(int DayShipAvg);
-
-        ~ShipGenerator() override;
+        ShipGenerator(unsigned int docks, unsigned int cranes, unsigned int DayShipAvg);
 
         void Behavior() override;
 
     private:
-        int DayShipAvg;
+        unsigned int DayShipAvg;
+        unsigned int docks;
+        unsigned int cranes;
 };
 
 #endif

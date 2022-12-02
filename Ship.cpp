@@ -10,5 +10,5 @@ Ship::Ship(){
 }
 
 void Ship::Behavior(){
-    Activate(Time + 0.1);
+    
 }

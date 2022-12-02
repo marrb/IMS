@@ -26,10 +26,10 @@ void printHelp(){
 }
 
 typedef struct {
-    int cargo_docks;
-    int ships;
-    int days;
-    int cranes;
+    unsigned int cargo_docks;
+    unsigned int ships;
+    unsigned int days;
+    unsigned int cranes;
 } my_args;
 
 int main(int argc, char **argv){
@@ -78,11 +78,33 @@ int main(int argc, char **argv){
         }
     }
 
-    Init(SIMULATION_START_TIME, SIMULATION_END_TIME);
-    (new ShipGenerator(my_args.ships))->Activate();
-    Run();
-    SIMLIB_statistics.Output();
+    cout << "-----------------------------------------------------------------------------\n"
+        << "STARTING SIMULATION\n"
+        << "Simulating with " << my_args.cargo_docks << " docks.\n"
+        << "Simulating with average of " << my_args.ships << " ships per day.\n"
+        << "Simulation will run for " << my_args.days << " days.\n"
+        << "Simulating with " << my_args.cranes << " cranes per dock.\n"
+        << "Simulation will run 5 times.\n"
+        << "-----------------------------------------------------------------------------\n";
 
+    for(int i = 1; i <= 5; i ++){
+        cout << "-----------------------------------------------------------------------------\n"
+            << "STARTING SIMULATION NUMBER " << i << "\n"
+            << "-----------------------------------------------------------------------------\n";
+
+        Init(SIMULATION_START_TIME, my_args.days * SIMULATION_END_TIME);
+        (new ShipGenerator(my_args.cargo_docks, my_args.cranes, my_args.ships))->Activate();
+        Run();
+        SIMLIB_statistics.Output();
+
+        cout << "-----------------------------------------------------------------------------\n"
+            << "SIMULATION NUMBER " << i << " ENDED \n"
+            << "-----------------------------------------------------------------------------\n";
+    }
+
+    cout << "-----------------------------------------------------------------------------\n"
+        << "SIMULATION ENDED\n"
+        << "-----------------------------------------------------------------------------\n";
 
     return EXIT_SUCCESS;
 }
