@@ -54,7 +54,7 @@ int main(int argc, char **argv){
                 break;
             
             case 'D':
-                if(((my_args.days = atoi(optarg))) <= 0 || (my_args.days = atoi(optarg) > 24)){
+                if((my_args.days = atoi(optarg)) <= 0){
                     printf("Invalid argument in option 'D'!");
                     exit(1);
                 }
