@@ -7,6 +7,8 @@ class ShipGenerator : public Process {
     public:
         ShipGenerator(int DayShipAvg);
 
+        ~ShipGenerator() override;
+
         void Behavior() override;
 
     private:

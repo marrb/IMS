@@ -1,9 +1,9 @@
 PROJ=ims-project
-CFLAGS= -std=c++17 -Wall -Wextra -Werror -pedantic
+CFLAGS= -std=c++17 -Wall -Wextra -Werror -pedantic -pthread
 CC=g++
 LIBS= -lsimlib
 RM=rm -f
-FILES=ims-project.cpp
+FILES=ims-project.cpp ShipGenerator.cpp ShipGenerator.hpp Ship.cpp Ship.hpp
 
 $(PROJ) : $(FILES)
 	$(CC) $(CFLAGS) -o $(PROJ) $(FILES) $(LIBS)

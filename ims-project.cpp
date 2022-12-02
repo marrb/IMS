@@ -46,35 +46,35 @@ int main(int argc, char **argv){
             case 'd':
                 if((my_args.cargo_docks = atoi(optarg)) <= 0){
                     fprintf(stderr, "Invalid argument in option 'd'!");
-                    exit(1);
+                    exit(EXIT_FAILURE);
                 }
                 break;
 
             case 's':
                 if((my_args.ships = atoi(optarg)) <= 0){
                     fprintf(stderr, "Invalid argument in option 's'!");
-                    exit(1);
+                    exit(EXIT_FAILURE);
                 }
                 break;
             
             case 'D':
                 if((my_args.days = atoi(optarg)) <= 0){
                     fprintf(stderr, "Invalid argument in option 'D'!");
-                    exit(1);
+                    exit(EXIT_FAILURE);
                 }
                 break;
 
             case 'c':
                 if((my_args.cranes = atoi(optarg)) <= 0){
                     fprintf(stderr, "Invalid argument in option 'c'!");
-                    exit(1);
+                    exit(EXIT_FAILURE);
                 }
                 break;
 
             case 'h':
             default:
                 printHelp();
-                exit(0);
+                exit(EXIT_SUCCESS);
         }
     }
 
@@ -84,5 +84,5 @@ int main(int argc, char **argv){
     SIMLIB_statistics.Output();
 
 
-    return 0;
+    return EXIT_SUCCESS;
 }

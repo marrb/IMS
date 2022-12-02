@@ -2,4 +2,13 @@
 // Created by adase on 2. 12. 2022.
 //
 
-#include "Ship.h"
+#include "Ship.hpp"
+#include <stdio.h>
+
+Ship::Ship(){
+
+}
+
+void Ship::Behavior(){
+    Activate(Time + 0.1);
+}

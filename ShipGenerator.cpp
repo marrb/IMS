@@ -1,11 +1,19 @@
 #include "ShipGenerator.hpp"
-#include "Ship.h"
+#include "Ship.hpp"
+#include <iostream>
+
+using namespace std;
 
 ShipGenerator::ShipGenerator(int DayShipAvg){
-    ShipGenerator::DayShipAvg = DayShipAvg;
+    DayShipAvg = DayShipAvg;
+}
+
+ShipGenerator::~ShipGenerator(){
+
 }
 
 void ShipGenerator::Behavior(){
     (new Ship)->Activate();
-    Activate(Time + Exponential(24.0 / DayShipAvg));
+    cout << "Serus";
+    Activate(Time + Exponential(1));
 }
