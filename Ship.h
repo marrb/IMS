@@ -6,12 +6,16 @@
 #define IMS_SHIP_H
 
 
-class Starting_Ship {
+class Ship : public Process {
 public:
+    Ship();
+    
     int Capacity;
 
-    const int AVARAGE_AVAILABLE_TIME_IN_PORT =
+    const int AVARAGE_AVAILABLE_TIME_IN_PORT = 5;
+
+    void Behavior() override;
 };
 
 
-#endif //IMS_SHIP_H
+#endif

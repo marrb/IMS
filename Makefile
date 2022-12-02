@@ -1,7 +1,7 @@
 PROJ=ims-project
 CFLAGS= -std=c++17 -Wall -Wextra -Werror -pedantic
 CC=g++
-LIBS=
+LIBS= -lsimlib
 RM=rm -f
 FILES=ims-project.cpp
 

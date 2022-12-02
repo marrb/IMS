@@ -1,16 +1,20 @@
+#include <iostream>
 #include <getopt.h>
 #include <cstdio>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string>
-#include <simlib.h>
+#include "simlib.h"
+#include "ShipGenerator.hpp"
 
-using namespace std;
+#define SIMULATION_START_TIME 0.0
+#define SIMULATION_END_TIME 24.0 * 60.0
 
 #define DEFAULT_NUMBER_OD_DOCKS 3
 #define DEFAULT_NUMBER_OF_SHIPS 10
 #define DEFAULT_NUMBER_OF_SIM_DAYS 1
 #define DEFAULT_NUMBER_OF_CRANES 1
+
+using namespace std;
 
 void printHelp(){
     puts("usage: [sudo] ./ims-project [-d <number of cargo docks>] [-s <number of ships per day>] [-D <days of simulation>] [-c <cargo cranes per dock>] [-h]\n");
@@ -34,7 +38,7 @@ int main(int argc, char **argv){
         DEFAULT_NUMBER_OD_DOCKS,
         DEFAULT_NUMBER_OF_SHIPS,
         DEFAULT_NUMBER_OF_SIM_DAYS,
-        DEFAULT_NUMBER_OF_CRANES,
+        DEFAULT_NUMBER_OF_CRANES
     };
 
     while((option = getopt_long(argc, argv, "d:s:D:c:h", nullptr, nullptr)) != -1){
@@ -73,6 +77,11 @@ int main(int argc, char **argv){
                 exit(0);
         }
     }
+
+    Init(SIMULATION_START_TIME, SIMULATION_END_TIME);
+    (new ShipGenerator(my_args.ships))->Activate();
+    Run();
+    SIMLIB_statistics.Output();
 
 
     return 0;
