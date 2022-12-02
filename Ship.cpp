@@ -6,9 +6,10 @@
 #include <stdio.h>
 #include <random>
 #include <ctime>
-Ship::Ship(Facility *docks){
+Ship::Ship(Facility *docks, Queue *ship_Q){
     Ship::docks = docks;
     is_starting = Random() <= 0.05;
+    Ship::ship_Q = ship_Q;
 
     if(is_starting){
         capacity_load = Exponential(15000);
@@ -20,16 +21,24 @@ Ship::Ship(Facility *docks){
 }
 
 void Ship::Behavior(){
-    Timeout_docks *tm = new Timeout_docks(this);
-    tm->Activate(Uniform(4320, 10080));//čas s minútach
-    Seize(*docks);
-    if((docks)->In() && is_starting){
-        Print("Isla do kokota\n");
-        return;
+    int fac_idx = -1;
+    while(1){
+        for(unsigned int i = 0; i < 2; i++){
+            if(!docks[i].Busy()){
+                fac_idx = (int) i;
+                break;
+            }
+        }
+        if(fac_idx != -1) break;
+        else{
+            Into(ship_Q);
+            Passivate();
+        }
     }
-    Release(*docks);
-
-
+    Seize(docks[fac_idx]);
+    Wait(1440);
+    Release(docks[fac_idx]);
+    if(ship_Q->Length() > 0) ship_Q->GetFirst()->Activate();
 }
 
 void Ship::Timeout() {

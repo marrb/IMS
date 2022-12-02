@@ -14,7 +14,7 @@ class ShipGenerator : public Event {
         unsigned int docks;
         unsigned int cranes;
         Facility **dock_facilities;
-
+        Queue ship_Q;
 };
 
 #endif

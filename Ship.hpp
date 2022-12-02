@@ -11,7 +11,7 @@
 
 class Ship : public Process {
     public:
-        Ship(Facility *docks);
+        Ship(Facility *docks, Queue *ship_Q);
 
         void Behavior() override;
         void Timeout();
@@ -20,6 +20,7 @@ private:
         int capacity_load;
         int capacity_unload;
         Facility *docks;
+        Queue *ship_Q;
 
 
         const int AVARAGE_AVAILABLE_TIME_IN_PORT = 5;
