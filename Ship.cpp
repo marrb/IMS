@@ -18,6 +18,7 @@ Ship::Ship(Facility **docks,
     Ship::dock_count = dock_count;  //Number of cargo docks in port
     Ship::cranes = cranes;          //Number of cranes per cargo dock
     Ship::ship_dock_wait = ship_dock_wait; // stats: Ship waiting for dock duration
+    Ship::dock_wait_time = 0;
 
     if(is_starting){
         //If the ship is starting at this port, it has to load more containers
@@ -35,7 +36,6 @@ void Ship::Behavior(){
     Timeout_ship *tm = new Timeout_ship(this);
     //Ships wait in the port from 3 - 7 days
     tm->Activate(Time + Uniform(4320, 10080));
-    double dock_wait_time = 0;
 
     while(1){
         //Check if there is an empty dock
@@ -87,20 +87,27 @@ void Ship::Behavior(){
 
 void Ship::Timeout() {
     //If the ship is starting in this port and timeout occurs, leave
-    if(is_starting) Cancel();
+    if(is_starting){
+        if(dock_wait_time != 0) dock_wait_time = Time - dock_wait_time;
+        (*ship_dock_wait)(dock_wait_time);
+        Release(*docks[fac_idx]);
+        if(ship_Q->Length() > 0) ship_Q->GetFirst()->Activate();
+        Cancel();
+    }
     timeout_occured = true;
 }
 
 void Ship::Loading(){
     for(int i = 0; i < capacity_load ; i++){
-     Wait(0.36 / cranes);
+     Wait(0.18 / cranes);
      if(timeout_occured){
         Release(*docks[fac_idx]);
+        if(ship_Q->Length() > 0) ship_Q->GetFirst()->Activate();
         Cancel();
      }
     }
 }
 
 void Ship::Unloading(){
-    Wait(capacity_unload * (0.36 / cranes));
+    Wait(capacity_unload * (0.18 / cranes));
 }

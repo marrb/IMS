@@ -44,6 +44,8 @@ class Ship : public Process {
                 bool timeout_occured = false;   //Flag if timeout occured
                 unsigned int cranes;            //Number of cranes per dock
                 Stat *ship_dock_wait;
+
+                double dock_wait_time;
 };
 
 

@@ -108,6 +108,7 @@ int main(int argc, char **argv){
         Run();
         SIMLIB_statistics.Output();
         ship_dock_wait->Output();
+        ship_dock_wait->Clear();
 
         cout << "-----------------------------------------------------------------------------\n"
             << "SIMULATION NUMBER " << i << " ENDED \n"
