@@ -5,11 +5,11 @@
 
 using namespace std;
 
-ShipGenerator::ShipGenerator(unsigned int docks, unsigned int cranes, unsigned int DayShipAvg){
+ShipGenerator::ShipGenerator(unsigned int docks, unsigned int cranes, unsigned int DayShipAvg, Stat *ship_dock_wait){
     ShipGenerator::DayShipAvg = DayShipAvg; //Average number of ships that come to the port each day
     ShipGenerator::docks = docks;           //Number of docks in the port   
     ShipGenerator::cranes = cranes;         //Number of cranes per dock
-    ShipGenerator::ship_dock_wait = new Stat("Ship waiting for dock duration");
+    ShipGenerator::ship_dock_wait = ship_dock_wait;
     //Initialize dock facilities
     dock_facilities = new Facility*[docks];
 
@@ -32,5 +32,6 @@ void ShipGenerator::Behavior(){
               avarege_ship_invoke_time,
               free_dock_capacity*/
               ))->Activate();
+    
     Activate(Time + Exponential(1440.0 / DayShipAvg));
 }

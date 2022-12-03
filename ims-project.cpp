@@ -78,6 +78,14 @@ int main(int argc, char **argv){
         }
     }
 
+    Stat *ship_dock_wait = new Stat("Ship waiting for dock duration");               //Time before ship got dock
+    Stat *ship_leave_without_dock;
+    Stat *ship_leave_while_loading;
+    Stat *loaded_containers_per_day;
+    Stat *unloaded_containers_per_day;
+    Stat *avarege_ship_invoke_time;
+    Stat *free_dock_capacity;
+
     cout << "-----------------------------------------------------------------------------\n"
         << "STARTING SIMULATION\n"
         << "Simulating with " << my_args.cargo_docks << " docks.\n"
@@ -93,9 +101,13 @@ int main(int argc, char **argv){
             << "-----------------------------------------------------------------------------\n";
 
         Init(SIMULATION_START_TIME, my_args.days * SIMULATION_END_TIME);
-        (new ShipGenerator(my_args.cargo_docks, my_args.cranes, my_args.ships))->Activate();
+        (new ShipGenerator(my_args.cargo_docks,
+            my_args.cranes,\
+            my_args.ships,
+            ship_dock_wait))->Activate();
         Run();
         SIMLIB_statistics.Output();
+        ship_dock_wait->Output();
 
         cout << "-----------------------------------------------------------------------------\n"
             << "SIMULATION NUMBER " << i << " ENDED \n"

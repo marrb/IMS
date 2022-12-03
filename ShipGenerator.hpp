@@ -5,7 +5,7 @@
 
 class ShipGenerator : public Event {
     public:
-        ShipGenerator(unsigned int docks, unsigned int cranes, unsigned int DayShipAvg);
+        ShipGenerator(unsigned int docks, unsigned int cranes, unsigned int DayShipAvg, Stat *ship_dock_wait);
 
         void Behavior() override;
 

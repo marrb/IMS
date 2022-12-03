@@ -35,6 +35,7 @@ void Ship::Behavior(){
     Timeout_ship *tm = new Timeout_ship(this);
     //Ships wait in the port from 3 - 7 days
     tm->Activate(Time + Uniform(4320, 10080));
+    double dock_wait_time = 0;
 
     while(1){
         //Check if there is an empty dock
@@ -49,12 +50,15 @@ void Ship::Behavior(){
         else{
             //Else wait in the queue until there is dock avalaible
             Into(ship_Q);
+            dock_wait_time = Time;
             Passivate();
         }
     }
     //Seize avalaible dock
     Seize(*docks[fac_idx]);
-    
+    if(dock_wait_time != 0) dock_wait_time = Time - dock_wait_time;
+    (*ship_dock_wait)(dock_wait_time);
+
     //Wait until the ship parks
     Wait(Exponential(15.0));
 
