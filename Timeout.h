@@ -6,14 +6,14 @@
 #define IMS_TIMEOUT_H
 #include "Ship.hpp"
 
-class Timeout_docks : public Event {
-public:
-    Timeout_docks(Ship *to) : Event(), To(to){
+class Timeout_ship : public Event {
+    public:
+        Timeout_ship(Ship *to) : Event(), To(to){
+        };
 
-    };
-    void Behavior();
+        void Behavior();
 
-    Ship *To;
+        Ship *To;
 };
 
 

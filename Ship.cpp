@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <random>
 #include <ctime>
+
 Ship::Ship(Facility **docks, Queue *ship_Q, unsigned int dock_count){
     Ship::docks = docks;
     is_starting = Random() <= 0.05;
@@ -23,7 +24,11 @@ Ship::Ship(Facility **docks, Queue *ship_Q, unsigned int dock_count){
 
 void Ship::Behavior(){
     int fac_idx = -1;
+    Timeout_ship *tm = new Timeout_ship(this);
+    tm->Activate(Time + Uniform(4320, 10080));
+
     while(1){
+        //Check if there is empty dock
         for(unsigned int i = 0; i < dock_count; i++){
             if(!docks[i]->Busy()){
                 fac_idx = (int) i;
@@ -37,12 +42,29 @@ void Ship::Behavior(){
         }
     }
     Seize(*docks[fac_idx]);
-    Wait(100);
+    Wait(Exponential(15 * 60.0));
+
+    if(is_starting){
+
+    }
+    else{
+
+    }
     Release(*docks[fac_idx]);
     if(ship_Q->Length() > 0) ship_Q->GetFirst()->Activate();
 }
 
 void Ship::Timeout() {
+    bool has_dock = false;
+    for(unsigned int i = 0; i < dock_count; i++){
+        if(docks[i]->In() == this){
+            has_dock = true;
+            break;
+        }
+    }
+    if(is_starting && !has_dock){
+        
+    }
     Out();
     Activate();
 }

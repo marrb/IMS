@@ -3,6 +3,7 @@
 //
 
 #include "Timeout.h"
-void Timeout_docks::Behavior(){
-
+void Timeout_ship::Behavior(){
+    To->Timeout();
+    Cancel();
 }
