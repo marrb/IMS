@@ -13,4 +13,4 @@ clean:
 	$(RM) *.o $(PROJ)
 
 run:
-	./$(PROJ) -s 7 -d 7 -c 4 -D 365
+	./$(PROJ) -s 6 -d 7 -c 4 -D 365
