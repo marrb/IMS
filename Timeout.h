@@ -6,6 +6,8 @@
 #define IMS_TIMEOUT_H
 #include "Ship.hpp"
 
+class Ship;
+
 class Timeout_ship : public Event {
     public:
         Timeout_ship(Ship *to) : Event(), To(to){

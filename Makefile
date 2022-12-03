@@ -1,5 +1,5 @@
 PROJ=ims-project
-CFLAGS= -std=c++17 -Wall -Wextra -Werror -pedantic
+CFLAGS= -std=c++17 
 CC=g++
 LIBS= -lsimlib
 RM=rm -f

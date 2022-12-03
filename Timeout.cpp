@@ -4,6 +4,7 @@
 
 #include "Timeout.h"
 void Timeout_ship::Behavior(){
+    //Call timeout method and cancel this
     To->Timeout();
     Cancel();
 }
