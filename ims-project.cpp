@@ -78,12 +78,12 @@ int main(int argc, char **argv){
         }
     }
 
-    Stat *ship_dock_wait = new Stat("Ship waiting for dock duration");               //Time before ship got dock
-    unsigned int *ship_leave_without_dock;
-    unsigned int *ship_leave_while_loading;
-    Stat *loaded_containers_per_day;
-    Stat *unloaded_containers_per_day;
-    Stat *avarege_ship_invoke_time;
+    Stat *ship_dock_wait = new Stat("Ship waiting for dock duration");                      //Time before ship got dock
+    unsigned int ship_leave_without_dock = 0;                                               //Number of ships that left without getting a dock
+    unsigned int ship_leave_while_loading = 0;                                              //Number of ships that had to left while being loaded
+    unsigned int loaded_containers_per_day = 0;                                             //Number of loaded containers per the length of simulation
+    unsigned int unloaded_containers_per_day = 0;                                           //Number of unloaded containers per length of simulation
+    Stat *average_ship_in_dock_time = new Stat("Time spent by ships being in the dock");    //Time that ships spent in the dock
     Stat *free_dock_capacity;
 
     cout << "-----------------------------------------------------------------------------\n"
@@ -105,23 +105,35 @@ int main(int argc, char **argv){
                             my_args.cranes,
                             my_args.ships,
                             ship_dock_wait,
-                            ship_leave_without_dock,
-                            ship_leave_while_loading,
-                            loaded_containers_per_day,
-                            unloaded_containers_per_day,
-                            avarege_ship_invoke_time,
+                            &ship_leave_without_dock,
+                            &ship_leave_while_loading,
+                            &loaded_containers_per_day,
+                            &unloaded_containers_per_day,
+                            average_ship_in_dock_time,
                             free_dock_capacity))->Activate();
         Run();
         SIMLIB_statistics.Output();
 
+
+        //Statistics--------------------------------------------------------------------------------------------------------
         ship_dock_wait->Output();
         ship_dock_wait->Clear();
 
-        cout << "Number of ships that left without getting a dock: " << *ship_leave_without_dock << "\n";
-        *ship_leave_without_dock = 0;
+        cout << "Number of ships that left without getting a dock: " << ship_leave_without_dock << "\n";
+        ship_leave_without_dock = 0;
 
-        cout << "Number of ships that left while loading cargo: " << *ship_leave_while_loading << "\n";
-        *ship_leave_while_loading = 0;
+        cout << "Number of ships that left while loading cargo: " << ship_leave_while_loading << "\n";
+        ship_leave_while_loading = 0;
+        
+        cout << "Number of loaded containers per " << my_args.days << " days: " << loaded_containers_per_day << "\n";
+        loaded_containers_per_day = 0;
+
+        cout << "Number of unloaded containers per " << my_args.days << " days: " << unloaded_containers_per_day << "\n";
+        unloaded_containers_per_day= 0;
+
+        average_ship_in_dock_time->Output();
+        average_ship_in_dock_time->Clear();
+        //-----------------------------------------------------------------------------------------------------------------
 
         cout << "-----------------------------------------------------------------------------\n"
             << "SIMULATION NUMBER " << i << " ENDED \n"

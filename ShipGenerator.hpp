@@ -11,9 +11,9 @@ class ShipGenerator : public Event {
                       Stat *ship_dock_wait,
                       unsigned int *ship_leave_without_dock,
                       unsigned int *ship_leave_while_loading,
-                      Stat *loaded_containers_per_day,
-                      Stat *unloaded_containers_per_day,
-                      Stat *avarege_ship_invoke_time,
+                      unsigned int *loaded_containers_per_day,
+                      unsigned int *unloaded_containers_per_day,
+                      Stat *average_ship_in_dock_time,
                       Stat *free_dock_capacity
                     );
 
@@ -31,9 +31,9 @@ class ShipGenerator : public Event {
         Stat *ship_dock_wait;       //Time before ship got dock
         unsigned int *ship_leave_without_dock;
         unsigned int *ship_leave_while_loading;
-        Stat *loaded_containers_per_day;
-        Stat *unloaded_containers_per_day;
-        Stat *avarege_ship_invoke_time;
+        unsigned int *loaded_containers_per_day;
+        unsigned int *unloaded_containers_per_day;
+        Stat *average_ship_in_dock_time;
         Stat *free_dock_capacity;
 
 

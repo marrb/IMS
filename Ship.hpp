@@ -18,9 +18,9 @@ class Ship : public Process {
                      Stat *ship_dock_wait,
                      unsigned int *ship_leave_without_dock,
                      unsigned int *ship_leave_while_loading,
-                     Stat *loaded_containers_per_day,
-                     Stat *unloaded_containers_per_day,
-                     Stat *avarege_ship_invoke_time,
+                     unsigned int *loaded_containers_per_day,
+                     unsigned int *unloaded_containers_per_day,
+                     Stat *average_ship_in_dock_time,
                      Stat *free_dock_capacity
                      );
 
@@ -52,13 +52,16 @@ class Ship : public Process {
                 bool isLoading = false;         //Indicates if the ship is currently loading
 
                 Stat *ship_dock_wait;
-                double dock_wait_time;
+                double dock_wait_time = 0;
 
                 unsigned int *ship_leave_without_dock;
                 unsigned int *ship_leave_while_loading;
-                Stat *loaded_containers_per_day;
-                Stat *unloaded_containers_per_day;
-                Stat *avarege_ship_invoke_time;
+                unsigned int *loaded_containers_per_day;
+                unsigned int *unloaded_containers_per_day;
+
+                Stat *average_ship_in_dock_time;
+                double in_dock_time = 0;
+
                 Stat *free_dock_capacity;
 };
 
