@@ -34,11 +34,11 @@ Ship::Ship(Facility **docks,
 
     if(is_starting){
         //If the ship is starting at this port, it has to load more containers
-        capacity_load = Normal(7500, 1);
+        capacity_load = Normal(3000, 1);
     }
     else{
         //Else if the ship is coming from different port it will unload less containers but also load some
-        capacity_unload = Normal(5000, 1);
+        capacity_unload = Normal(2500, 1);
         capacity_load = Normal(capacity_unload/1.2, 1);
     }
 }
