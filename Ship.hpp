@@ -63,6 +63,7 @@ class Ship : public Process {
                 double in_dock_time = 0;
 
                 Stat *free_dock_capacity;
+                unsigned int free_docks = 0;
 };
 
 

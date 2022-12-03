@@ -54,9 +54,11 @@ void Ship::Behavior(){
         for(unsigned int i = 0; i < dock_count; i++){
             if(!docks[i]->Busy()){
                 fac_idx = (int) i;
-                break;
+                free_docks++;
             }
         }
+
+        (*free_dock_capacity)(free_docks);
         //If an empty dock is found continue
         if(fac_idx != -1) break;
         else{
