@@ -124,11 +124,14 @@ void Ship::Timeout() {
 }
 
 void Ship::Loading(){
+    // Ship loading
     isLoading = true;
 
     for(int i = 0; i < capacity_load ; i++){
+    // waiting to load one container
      Wait(0.18 / cranes);
      *loaded_containers_per_day += 1;
+     // Ships must leave if the timeout occurs
      if(timeout_occured){
         Release(*docks[fac_idx]);
         if(ship_Q->Length() > 0) ship_Q->GetFirst()->Activate();
@@ -140,6 +143,7 @@ void Ship::Loading(){
 }
 
 void Ship::Unloading(){
+    // Ship unloading, ship can not leave
     Wait(capacity_unload * (0.18 / cranes));
     *unloaded_containers_per_day += capacity_unload;
 }

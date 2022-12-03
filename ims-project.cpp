@@ -40,7 +40,7 @@ int main(int argc, char **argv){
         DEFAULT_NUMBER_OF_SIM_DAYS,
         DEFAULT_NUMBER_OF_CRANES
     };
-
+    //parsing arguments
     while((option = getopt_long(argc, argv, "d:s:D:c:h", nullptr, nullptr)) != -1){
         switch (option){
             case 'd':
@@ -84,7 +84,7 @@ int main(int argc, char **argv){
     unsigned int loaded_containers_per_day = 0;                                             //Number of loaded containers per the length of simulation
     unsigned int unloaded_containers_per_day = 0;                                           //Number of unloaded containers per length of simulation
     Stat *average_ship_in_dock_time = new Stat("Time spent by ships being in the dock");    //Time that ships spent in the dock
-    Stat *free_dock_capacity = new Stat("Free docks at one time");
+    Stat *free_dock_capacity = new Stat("Free docks at one time");                          //Number of free docks at one time
 
     cout << "-----------------------------------------------------------------------------\n"
         << "STARTING SIMULATION\n"

@@ -15,6 +15,7 @@ class Timeout_ship : public Event {
 
         void Behavior();
 
+        //pointer to ship that called Timeout_ship
         Ship *To;
 };
 

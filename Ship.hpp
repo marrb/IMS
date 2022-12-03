@@ -40,29 +40,29 @@ class Ship : public Process {
                 void Unloading();
 
         private:
-                bool is_starting;               //Indicates if the ship's starting location is this port (ship is empty)
-                int capacity_load;              //Containers to load on to the ship
-                int capacity_unload;            //Containers to unload from the ship
-                unsigned int dock_count;        //Number of ocks in the port
-                Facility **docks;               //Dock facilities
-                Queue *ship_Q;                  //Ship queue
-                int fac_idx = -1;               //Facility index that the ship seized
-                bool timeout_occured = false;   //Flag if timeout occured
-                unsigned int cranes;            //Number of cranes per dock
-                bool isLoading = false;         //Indicates if the ship is currently loading
+                bool is_starting;                           //Indicates if the ship's starting location is this port (ship is empty)
+                int capacity_load;                          //Containers to load on to the ship
+                int capacity_unload;                        //Containers to unload from the ship
+                unsigned int dock_count;                    //Number of ocks in the port
+                Facility **docks;                           //Dock facilities
+                Queue *ship_Q;                              //Ship queue
+                int fac_idx = -1;                           //Facility index that the ship seized
+                bool timeout_occured = false;               //Flag if timeout occured
+                unsigned int cranes;                        //Number of cranes per dock
+                bool isLoading = false;                     //Indicates if the ship is currently loading
 
-                Stat *ship_dock_wait;
+
+                Stat *ship_dock_wait;                       //Time before ship got dock
                 double dock_wait_time = 0;
+                unsigned int *ship_leave_without_dock;      //Number of ships that left without getting doc
+                unsigned int *ship_leave_while_loading;     //Number of ships that had to left while being loaded
+                unsigned int *loaded_containers_per_day;    //Number of loaded containers per the length of simulation
+                unsigned int *unloaded_containers_per_day;  //Number of unloaded containers per length of simulation
 
-                unsigned int *ship_leave_without_dock;
-                unsigned int *ship_leave_while_loading;
-                unsigned int *loaded_containers_per_day;
-                unsigned int *unloaded_containers_per_day;
-
-                Stat *average_ship_in_dock_time;
+                Stat *average_ship_in_dock_time;            //Time that ships spent in the dock
                 double in_dock_time = 0;
 
-                Stat *free_dock_capacity;
+                Stat *free_dock_capacity;                   //Number of free docks at one time
                 unsigned int free_docks = 0;
 };
 

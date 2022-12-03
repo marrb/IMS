@@ -31,7 +31,6 @@ ShipGenerator::ShipGenerator(unsigned int docks,
 
     //Initialize dock facilities
     dock_facilities = new Facility*[docks];
-
     for(unsigned int i = 0; i < docks; i++){
         dock_facilities[i] = new Facility;
     }
