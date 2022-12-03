@@ -5,7 +5,17 @@
 
 class ShipGenerator : public Event {
     public:
-        ShipGenerator(unsigned int docks, unsigned int cranes, unsigned int DayShipAvg, Stat *ship_dock_wait);
+        ShipGenerator(unsigned int docks,
+                      unsigned int cranes, 
+                      unsigned int DayShipAvg,
+                      Stat *ship_dock_wait,
+                      unsigned int *ship_leave_without_dock,
+                      Stat *ship_leave_while_loading,
+                      Stat *loaded_containers_per_day,
+                      Stat *unloaded_containers_per_day,
+                      Stat *avarege_ship_invoke_time,
+                      Stat *free_dock_capacity
+                    );
 
         void Behavior() override;
 
@@ -16,13 +26,15 @@ class ShipGenerator : public Event {
         Facility **dock_facilities; //Dock facilities
         Queue ship_Q;               //Ship queue
 
+
+
         Stat *ship_dock_wait;       //Time before ship got dock
-/*        Stat *ship_leave_without_dock;
+        unsigned int *ship_leave_without_dock;
         Stat *ship_leave_while_loading;
         Stat *loaded_containers_per_day;
         Stat *unloaded_containers_per_day;
         Stat *avarege_ship_invoke_time;
-        Stat *free_dock_capacity;*/
+        Stat *free_dock_capacity;
 
 
 

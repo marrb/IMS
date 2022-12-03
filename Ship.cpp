@@ -10,15 +10,29 @@ Ship::Ship(Facility **docks,
            Queue *ship_Q,
            unsigned int dock_count,
            unsigned int cranes,
-           Stat *ship_dock_wait
+           Stat *ship_dock_wait,
+           unsigned int *ship_leave_without_dock,
+           Stat *ship_leave_while_loading,
+           Stat *loaded_containers_per_day,
+           Stat *unloaded_containers_per_day,
+           Stat *avarege_ship_invoke_time,
+           Stat *free_dock_capacity
            ){
     Ship::docks = docks;            //Dock facilities
     is_starting = Random() <= 0.05; //With 5% probability this port is the ship's first destination (ship is empty)
     Ship::ship_Q = ship_Q;          //Ship queue
     Ship::dock_count = dock_count;  //Number of cargo docks in port
     Ship::cranes = cranes;          //Number of cranes per cargo dock
+
     Ship::ship_dock_wait = ship_dock_wait; // stats: Ship waiting for dock duration
     Ship::dock_wait_time = 0;
+
+    Ship::ship_leave_without_dock = ship_leave_without_dock;
+    Ship::ship_leave_while_loading = ship_leave_while_loading;
+    Ship::loaded_containers_per_day = loaded_containers_per_day;
+    Ship::unloaded_containers_per_day = unloaded_containers_per_day;
+    Ship::avarege_ship_invoke_time = avarege_ship_invoke_time;
+    Ship::free_dock_capacity = free_dock_capacity;
 
     if(is_starting){
         //If the ship is starting at this port, it has to load more containers
@@ -90,7 +104,11 @@ void Ship::Timeout() {
     if(is_starting){
         if(dock_wait_time != 0) dock_wait_time = Time - dock_wait_time;
         (*ship_dock_wait)(dock_wait_time);
-        Release(*docks[fac_idx]);
+
+        if(fac_idx != -1){
+            Release(*docks[fac_idx]);
+            *ship_leave_without_dock++;
+        }
         if(ship_Q->Length() > 0) ship_Q->GetFirst()->Activate();
         Cancel();
     }
