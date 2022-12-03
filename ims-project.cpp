@@ -80,7 +80,7 @@ int main(int argc, char **argv){
 
     Stat *ship_dock_wait = new Stat("Ship waiting for dock duration");               //Time before ship got dock
     unsigned int *ship_leave_without_dock;
-    Stat *ship_leave_while_loading;
+    unsigned int *ship_leave_while_loading;
     Stat *loaded_containers_per_day;
     Stat *unloaded_containers_per_day;
     Stat *avarege_ship_invoke_time;
@@ -119,6 +119,9 @@ int main(int argc, char **argv){
 
         cout << "Number of ships that left without getting a dock: " << *ship_leave_without_dock << "\n";
         *ship_leave_without_dock = 0;
+
+        cout << "Number of ships that left while loading cargo: " << *ship_leave_while_loading << "\n";
+        *ship_leave_while_loading = 0;
 
         cout << "-----------------------------------------------------------------------------\n"
             << "SIMULATION NUMBER " << i << " ENDED \n"

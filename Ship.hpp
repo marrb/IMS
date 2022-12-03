@@ -17,7 +17,7 @@ class Ship : public Process {
                      unsigned int cranes,
                      Stat *ship_dock_wait,
                      unsigned int *ship_leave_without_dock,
-                     Stat *ship_leave_while_loading,
+                     unsigned int *ship_leave_while_loading,
                      Stat *loaded_containers_per_day,
                      Stat *unloaded_containers_per_day,
                      Stat *avarege_ship_invoke_time,
@@ -49,12 +49,13 @@ class Ship : public Process {
                 int fac_idx = -1;               //Facility index that the ship seized
                 bool timeout_occured = false;   //Flag if timeout occured
                 unsigned int cranes;            //Number of cranes per dock
+                bool isLoading = false;         //Indicates if the ship is currently loading
 
                 Stat *ship_dock_wait;
                 double dock_wait_time;
 
                 unsigned int *ship_leave_without_dock;
-                Stat *ship_leave_while_loading;
+                unsigned int *ship_leave_while_loading;
                 Stat *loaded_containers_per_day;
                 Stat *unloaded_containers_per_day;
                 Stat *avarege_ship_invoke_time;

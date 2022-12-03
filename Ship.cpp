@@ -12,7 +12,7 @@ Ship::Ship(Facility **docks,
            unsigned int cranes,
            Stat *ship_dock_wait,
            unsigned int *ship_leave_without_dock,
-           Stat *ship_leave_while_loading,
+           unsigned int *ship_leave_while_loading,
            Stat *loaded_containers_per_day,
            Stat *unloaded_containers_per_day,
            Stat *avarege_ship_invoke_time,
@@ -105,10 +105,15 @@ void Ship::Timeout() {
         if(dock_wait_time != 0) dock_wait_time = Time - dock_wait_time;
         (*ship_dock_wait)(dock_wait_time);
 
+        if(isLoading) *ship_leave_while_loading++;
+
         if(fac_idx != -1){
             Release(*docks[fac_idx]);
+        }
+        else{
             *ship_leave_without_dock++;
         }
+        
         if(ship_Q->Length() > 0) ship_Q->GetFirst()->Activate();
         Cancel();
     }
@@ -116,6 +121,8 @@ void Ship::Timeout() {
 }
 
 void Ship::Loading(){
+    isLoading = true;
+
     for(int i = 0; i < capacity_load ; i++){
      Wait(0.18 / cranes);
      if(timeout_occured){
@@ -124,6 +131,8 @@ void Ship::Loading(){
         Cancel();
      }
     }
+
+    isLoading = false;
 }
 
 void Ship::Unloading(){

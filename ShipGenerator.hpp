@@ -10,7 +10,7 @@ class ShipGenerator : public Event {
                       unsigned int DayShipAvg,
                       Stat *ship_dock_wait,
                       unsigned int *ship_leave_without_dock,
-                      Stat *ship_leave_while_loading,
+                      unsigned int *ship_leave_while_loading,
                       Stat *loaded_containers_per_day,
                       Stat *unloaded_containers_per_day,
                       Stat *avarege_ship_invoke_time,
@@ -30,7 +30,7 @@ class ShipGenerator : public Event {
 
         Stat *ship_dock_wait;       //Time before ship got dock
         unsigned int *ship_leave_without_dock;
-        Stat *ship_leave_while_loading;
+        unsigned int *ship_leave_while_loading;
         Stat *loaded_containers_per_day;
         Stat *unloaded_containers_per_day;
         Stat *avarege_ship_invoke_time;
