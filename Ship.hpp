@@ -11,7 +11,12 @@
 
 class Ship : public Process {
         public:
-                Ship(Facility **docks, Queue *ship_Q, unsigned int dock_count, unsigned int cranes);
+                Ship(Facility **docks,
+                     Queue *ship_Q,
+                     unsigned int dock_count,
+                     unsigned int cranes,
+                     Stat *ship_dock_wait
+                     );
 
                 void Behavior() override;
                 void Timeout();
@@ -38,6 +43,7 @@ class Ship : public Process {
                 int fac_idx = -1;               //Facility index that the ship seized
                 bool timeout_occured = false;   //Flag if timeout occured
                 unsigned int cranes;            //Number of cranes per dock
+                Stat *ship_dock_wait;
 };
 
 

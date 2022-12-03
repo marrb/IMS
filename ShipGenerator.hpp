@@ -15,6 +15,19 @@ class ShipGenerator : public Event {
         unsigned int cranes;        //Number of container cranes per dock
         Facility **dock_facilities; //Dock facilities
         Queue ship_Q;               //Ship queue
+
+        Stat *ship_dock_wait;       //Time before ship got dock
+/*        Stat *ship_leave_without_dock;
+        Stat *ship_leave_while_loading;
+        Stat *loaded_containers_per_day;
+        Stat *unloaded_containers_per_day;
+        Stat *avarege_ship_invoke_time;
+        Stat *free_dock_capacity;*/
+
+
+
+
+
 };
 
 #endif

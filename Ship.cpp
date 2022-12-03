@@ -6,12 +6,18 @@
 #include <stdio.h>
 #include <ctime>
 
-Ship::Ship(Facility **docks, Queue *ship_Q, unsigned int dock_count, unsigned int cranes){
+Ship::Ship(Facility **docks,
+           Queue *ship_Q,
+           unsigned int dock_count,
+           unsigned int cranes,
+           Stat *ship_dock_wait
+           ){
     Ship::docks = docks;            //Dock facilities
     is_starting = Random() <= 0.05; //With 5% probability this port is the ship's first destination (ship is empty)
     Ship::ship_Q = ship_Q;          //Ship queue
     Ship::dock_count = dock_count;  //Number of cargo docks in port
     Ship::cranes = cranes;          //Number of cranes per cargo dock
+    Ship::ship_dock_wait = ship_dock_wait; // stats: Ship waiting for dock duration
 
     if(is_starting){
         //If the ship is starting at this port, it has to load more containers
@@ -82,7 +88,13 @@ void Ship::Timeout() {
 }
 
 void Ship::Loading(){
-    Wait(capacity_load * (0.36 / cranes));
+    for(int i = 0; i < capacity_load ; i++){
+     Wait(0.36 / cranes);
+     if(timeout_occured){
+        Release(*docks[fac_idx]);
+        Cancel();
+     }
+    }
 }
 
 void Ship::Unloading(){
