@@ -129,7 +129,7 @@ void Ship::Loading(){
 
     for(int i = 0; i < capacity_load ; i++){
     // waiting to load one container
-     Wait(0.18 / cranes);
+     Wait(1.08 / cranes);
      *loaded_containers_per_day += 1;
      // Ships must leave if the timeout occurs
      if(timeout_occured){
@@ -144,6 +144,6 @@ void Ship::Loading(){
 
 void Ship::Unloading(){
     // Ship unloading, ship can not leave
-    Wait(capacity_unload * (0.18 / cranes));
+    Wait(capacity_unload * (1.08 / cranes));
     *unloaded_containers_per_day += capacity_unload;
 }
